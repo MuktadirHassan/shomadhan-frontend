@@ -1,15 +1,24 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Bgwrapper from "./components/Bgwrapper";
+import Blogpage from "./components/Blogpage";
 import Homepage from "./components/Homepage";
+import Navbar from "./components/Navbar";
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/">
-          <Homepage />
-        </Route>
-      </Switch>
-    </Router>
+    <Bgwrapper>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/blog">
+            <Blogpage />
+          </Route>
+          <Route path="/">
+            <Homepage />
+          </Route>
+        </Switch>
+      </Router>
+    </Bgwrapper>
   );
 }
 

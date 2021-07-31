@@ -1,12 +1,14 @@
 import React from "react";
-import "./Homepage.css";
-import Navbar from "./Navbar";
+import BlogCard from "./BlogCard";
+import "./css/Homepage.css";
 export default function Homepage() {
   return (
-    <div className="container px-2 mx-auto">
-      <Navbar />
+    <div className="container mx-auto">
       <main className="max-w-3xl mx-auto">
-        <h1 className="py-10 font-bold text-8xl text-animate">Shomadhan</h1>
+        <h1 className="px-5 text-5xl font-bold sm:text-6xl md:py-10 md:text-8xl text-animate">
+          Shomadhan
+        </h1>
+        <BlogCard />
       </main>
     </div>
   );

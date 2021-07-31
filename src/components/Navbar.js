@@ -7,7 +7,7 @@ export default function Navbar() {
       <div className="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
         <Link
           to="/"
-          className="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0"
+          className="z-20 flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
