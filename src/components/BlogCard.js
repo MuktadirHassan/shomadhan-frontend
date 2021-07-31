@@ -2,41 +2,47 @@ import React from "react";
 import { Link } from "react-router-dom";
 import img from "../assets/img.jpg";
 import Image from "./Image";
-export default function BlogCard() {
+export default function BlogCard({ data }) {
   return (
-    <article class="text-gray-600 body-font overflow-hidden">
-      <div class="container px-5 py-24 md:py-10 mx-auto">
-        <div class="-my-8 divide-y-2 divide-gray-100">
-          <div class="md:py-8 flex flex-wrap md:flex-nowrap">
-            <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 w-full flex flex-col">
+    <article className="overflow-hidden text-gray-600 body-font">
+      <div className="container px-5 py-24 mx-auto md:py-10">
+        <div className="-my-8 divide-y-2 divide-gray-100">
+          <div className="flex flex-wrap md:py-8 md:flex-nowrap">
+            <div className="flex flex-col flex-shrink-0 w-full mb-6 md:w-64 md:mb-0">
               <div className="md:px-3">
                 <Image height="2" width="3" src={img} alt="alt-text" />
               </div>
-              <div class="mt-1 md:px-3 text-gray-500 text-sm">12 Jun 2019</div>
+              <div className="mt-1 text-sm text-gray-500 md:px-3">
+                <span>
+                  {new Date(data.date).toLocaleDateString("en-BD", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
-            <div class="md:flex-grow">
-              <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                Bitters hashtag waistcoat fashion axe chia unicorn
+            <div className="md:flex-grow">
+              <h2 className="mb-2 text-2xl font-medium text-gray-900 title-font">
+                {data.title}
               </h2>
-              <p class="leading-relaxed">
-                Glossier echo park pug, church-key sartorial biodiesel
-                vexillologist pop-up snackwave ramps cornhole. Marfa 3 wolf moon
-                party messenger bag selfies, poke vaporware kombucha
-                lumbersexual pork belly polaroid hoodie portland craft beer.
-              </p>
+              <p className="leading-relaxed">{data.body}</p>
               <Link
-                to="/blog"
-                class="text-indigo-500 inline-flex items-center mt-4"
+                to={`/blog/${data._id}`}
+                className="inline-flex items-center mt-4 text-indigo-500"
               >
                 Learn More
                 <svg
-                  class="w-4 h-4 ml-2"
+                  className="w-4 h-4 ml-2"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  stroke-width="2"
+                  strokeWidth="2"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path d="M5 12h14"></path>
                   <path d="M12 5l7 7-7 7"></path>

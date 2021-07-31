@@ -2,13 +2,24 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "./AuthContext";
 export default function Login() {
-  const { user } = useAuth();
+  const { setUser } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    fetch("http://localhost:5000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <section className="text-gray-600 body-font">

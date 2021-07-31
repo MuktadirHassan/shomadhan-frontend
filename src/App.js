@@ -14,7 +14,7 @@ function App() {
         <Router>
           <Navbar />
           <Switch>
-            <Route path="/blog">
+            <Route path="/blog/:id">
               <Blogpage />
             </Route>
             <Route path="/register">
