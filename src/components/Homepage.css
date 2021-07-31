@@ -1,0 +1,24 @@
+.text-animate {
+  background-image: linear-gradient(
+    to left,
+    #2ecc71,
+    #3498bd,
+    #9b59b6,
+    #f39c12
+  );
+  color: transparent;
+  background-clip: text;
+  animation: animate 15s linear infinite;
+  background-size: 500%;
+}
+@keyframes animate {
+  0% {
+    background-position: 0 100%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  0% {
+    background-position: 0 100%;
+  }
+}
