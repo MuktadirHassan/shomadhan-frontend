@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -8,6 +8,13 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  // Auth persistence
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      setUser(JSON.parse(sessionStorage.getItem("userInfo")));
+    }
+  }, []);
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}

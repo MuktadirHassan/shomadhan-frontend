@@ -12,24 +12,21 @@ export default function BlogCard({ data }) {
               <div className="md:px-3">
                 <Image height="2" width="3" src={img} alt="alt-text" />
               </div>
-              <div className="mt-1 text-sm text-gray-500 md:px-3">
-                <span>
-                  {new Date(data.date).toLocaleDateString("en-BD", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </span>
-                <span></span>
-                <span></span>
-              </div>
             </div>
             <div className="md:flex-grow">
               <h2 className="mb-2 text-2xl font-medium text-gray-900 title-font">
                 {data.title}
               </h2>
+
               <p className="leading-relaxed">{data.body}</p>
+              <div className="mt-4 text-xs text-gray-500">
+                {new Date(data.date).toLocaleDateString("en-BD", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </div>
               <Link
                 to={`/blog/${data._id}`}
                 className="inline-flex items-center mt-4 text-indigo-500"

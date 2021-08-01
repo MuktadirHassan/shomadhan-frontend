@@ -17,7 +17,13 @@ export default function Login() {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((data) => setUser(data))
+      .then((data) => {
+        console.log(data);
+        sessionStorage.clear();
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("userInfo", JSON.stringify(data.userInfo));
+        setUser(data.userInfo);
+      })
       .catch((err) => console.log(err));
   };
 

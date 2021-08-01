@@ -3,9 +3,12 @@ import "./App.css";
 import { AuthProvider } from "./components/AuthContext";
 import Bgwrapper from "./components/Bgwrapper";
 import Blogpage from "./components/Blogpage";
+import Dashboard from "./components/Dashboard";
 import Homepage from "./components/Homepage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
+import PostArticle from "./components/PostArticle";
+import Profile from "./components/Profile";
 import Register from "./components/Register";
 function App() {
   return (
@@ -14,6 +17,15 @@ function App() {
         <Router>
           <Navbar />
           <Switch>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/post-article">
+              <PostArticle />
+            </Route>
             <Route path="/blog/:id">
               <Blogpage />
             </Route>
