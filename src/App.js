@@ -8,6 +8,7 @@ import Homepage from "./components/Homepage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import PostArticle from "./components/PostArticle";
+import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 function App() {
@@ -17,15 +18,15 @@ function App() {
         <Router>
           <Navbar />
           <Switch>
-            <Route path="/dashboard">
+            <PrivateRoute path="/dashboard">
               <Dashboard />
-            </Route>
-            <Route path="/profile">
+            </PrivateRoute>
+            <PrivateRoute path="/profile">
               <Profile />
-            </Route>
-            <Route path="/post-article">
+            </PrivateRoute>
+            <PrivateRoute path="/post-article">
               <PostArticle />
-            </Route>
+            </PrivateRoute>
             <Route path="/blog/:id">
               <Blogpage />
             </Route>

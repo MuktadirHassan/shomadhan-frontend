@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
+import EditArticle from "./EditArticle";
 import MyArticles from "./MyArticles";
 import PostArticle from "./PostArticle";
 
@@ -25,6 +26,9 @@ export default function Profile() {
         </aside>
         <main className="flex-1">
           <Switch>
+            <Route path="/profile/edit-article/:articleId">
+              <EditArticle />
+            </Route>
             <Route path="/profile/post-article">
               <PostArticle />
             </Route>

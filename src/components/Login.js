@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 export default function Login() {
   const { setUser } = useAuth();
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [error, setError] = useState(null);
   const onSubmit = (data) => {
     fetch("http://localhost:5000/api/v1/login", {
       method: "POST",
@@ -18,11 +21,19 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        sessionStorage.clear();
-        sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("userInfo", JSON.stringify(data.userInfo));
-        setUser(data.userInfo);
+        if (data.message === "Authentication success") {
+          sessionStorage.clear();
+          sessionStorage.setItem("token", data.token);
+          sessionStorage.setItem("userInfo", JSON.stringify(data.userInfo));
+          setUser(data.userInfo);
+          if (data?.userInfo?.user?.role === "admin") {
+            history.push("/dashboard");
+          } else {
+            history.push("/profile");
+          }
+        } else {
+          setError("Email or Password Incorrect. 😶");
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -53,6 +64,7 @@ export default function Login() {
               </label>
               <input
                 {...register("email", { required: true })}
+                onChange={() => setError(null)}
                 type="email"
                 id="email"
                 className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
@@ -72,6 +84,7 @@ export default function Login() {
               </label>
               <input
                 {...register("password", { required: true })}
+                onChange={() => setError(null)}
                 type="password"
                 id="password"
                 className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
@@ -89,9 +102,7 @@ export default function Login() {
               Login
             </button>
           </form>
-          <p className="mt-3 text-xs text-gray-500">
-            Random text just to make it look beautiful.
-          </p>
+          <p className="mt-3 text-xs text-gray-500">{error}</p>
         </div>
       </div>
     </section>

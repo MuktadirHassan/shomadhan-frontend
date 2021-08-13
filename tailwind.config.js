@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [],
+  // purge: ["./src/**/*.html", "./src/**/*.js"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -12,10 +12,10 @@ module.exports = {
             transform: "translate(0px, 0px) scale(1)",
           },
           "33%": {
-            transform: "translate(300px, -50px) scale(1.1)",
+            transform: "translate(30px, -50px) scale(1.05)",
           },
           "66%": {
-            transform: "translate(-20pxpx, 20px) scale(0.9)",
+            transform: "translate(-20pxpx, 20px) scale(0.95)",
           },
           "100%": {
             transform: "translate(0px, 0px) scale(1)",

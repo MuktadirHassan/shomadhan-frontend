@@ -13,6 +13,8 @@ export const AuthProvider = ({ children }) => {
     const token = sessionStorage.getItem("token");
     if (token) {
       setUser(JSON.parse(sessionStorage.getItem("userInfo")));
+    } else {
+      setUser({});
     }
   }, []);
   return (

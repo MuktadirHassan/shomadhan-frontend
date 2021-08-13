@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import useFetch from "./../lib/useFetch";
 import BlogCard from "./BlogCard";
 import "./css/Homepage.css";
+import Pagination from "./Pagination";
 export default function Homepage() {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(3);
   const { data, loading, error } = useFetch(
-    "http://localhost:5000/api/v1/articles"
+    `http://localhost:5000/api/v1/articles?page=${page}&limit=${limit}`
   );
 
   return (
@@ -15,7 +18,12 @@ export default function Homepage() {
         </h1>
         {loading
           ? "Loading"
-          : data && data.map((blog) => <BlogCard data={blog} />)}
+          : data &&
+            data.articles.map((blog) => (
+              <BlogCard data={blog} key={blog?._id} />
+            ))}
+
+        <Pagination data={data} setPage={setPage} />
       </main>
     </div>
   );

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import useFetch from "./../lib/useFetch";
 import { useAuth } from "./AuthContext";
 
-export default function PostArticle() {
+export default function EditArticle() {
   const { user } = useAuth();
+  const { articleId } = useParams();
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState("");
   const {
@@ -11,29 +14,37 @@ export default function PostArticle() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({ defaultValues: null });
+
+  const { data } = useFetch(
+    "http://localhost:5000/api/v1/article/" + articleId
+  );
+  useEffect(() => {
+    reset(data);
+  }, [data, reset]);
+
   const onSubmit = (data) => {
     setLoading(true);
     const schema = {
       title: data.title,
       body: data.content,
-      authorEmail: user.user?.email,
-      authorId: user.user?.uid,
     };
-    fetch("http://localhost:5000/api/v1/post-article", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: sessionStorage.getItem("token"),
-      },
-      body: JSON.stringify(schema),
-    })
+    fetch(
+      `http://localhost:5000/api/v1/update-article/${user?.user?.uid}/${articleId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: sessionStorage.getItem("token"),
+        },
+        body: JSON.stringify(schema),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setTimeout(() => {
           setLoading(false);
           setResponse(data);
-          console.log(data);
           reset();
         }, 500);
       })
@@ -41,10 +52,22 @@ export default function PostArticle() {
         setLoading(false);
         console.log(err);
         setResponse(err);
-      });
+      })
+      .finally(() => data && reset(data));
   };
+
   return (
     <div className="flex flex-col w-full p-8 mx-auto mt-10 bg-gray-100 rounded-lg lg:w-2/3 md:w-2/3 md:mt-0">
+      <p className="pb-2 text-sm text-gray-500">
+        Author: {data && data[0].authorEmail}
+      </p>
+      <p className="pb-2 text-sm text-gray-500">
+        Date Published: {data && new Date(data[0].date).toLocaleString("en-BD")}
+      </p>
+      <p className="pb-2 text-sm text-gray-500">
+        Last Updated:{" "}
+        {data && new Date(data[0].lastUpdated).toLocaleString("en-BD")}
+      </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="relative mb-4">
           <label htmlFor="title" className="text-sm leading-7 text-gray-600">
@@ -55,6 +78,7 @@ export default function PostArticle() {
             type="text"
             id="title"
             className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+            defaultValue={data && data[0].title}
           />
           {errors.title && (
             <span className="text-xs leading-7">This field is required</span>
@@ -66,6 +90,7 @@ export default function PostArticle() {
           </label>
           <textarea
             {...register("content", { required: true })}
+            defaultValue={data && data[0].body}
             type="content"
             id="content"
             className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
@@ -102,7 +127,7 @@ export default function PostArticle() {
               </svg>
             </span>
           ) : (
-            <span>Publish</span>
+            <span>Update</span>
           )}
         </button>
       </form>
