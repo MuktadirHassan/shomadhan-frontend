@@ -5,9 +5,9 @@ import "./css/Homepage.css";
 import Pagination from "./Pagination";
 export default function Homepage() {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(3);
-  const { data, loading, error } = useFetch(
-    `http://localhost:5000/api/v1/articles?page=${page}&limit=${limit}`
+  const [limit] = useState(3);
+  const { data, loading } = useFetch(
+    `https://shomadhan.herokuapp.com/api/v1/articles?page=${page}&limit=${limit}`
   );
 
   return (
@@ -23,7 +23,7 @@ export default function Homepage() {
               <BlogCard data={blog} key={blog?._id} />
             ))}
 
-        <Pagination data={data} setPage={setPage} />
+        {data && <Pagination data={data} setPage={setPage} />}
       </main>
     </div>
   );

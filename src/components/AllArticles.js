@@ -2,11 +2,9 @@ import React from "react";
 import useFetch from "./../lib/useFetch";
 
 export default function AllArticles() {
-  const { data, errors, loading } = useFetch(
-    `http://localhost:5000/api/v1/articles/`
-  );
+  const { data } = useFetch(`https://shomadhan.herokuapp.com/api/v1/articles/`);
   const deleteArticle = (id) => {
-    fetch("http://localhost:5000/admin/delete-article/" + id, {
+    fetch("https://shomadhan.herokuapp.com/admin/delete-article/" + id, {
       headers: {
         authorization: sessionStorage.getItem("token"),
       },

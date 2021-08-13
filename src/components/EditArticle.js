@@ -17,7 +17,7 @@ export default function EditArticle() {
   } = useForm({ defaultValues: null });
 
   const { data } = useFetch(
-    "http://localhost:5000/api/v1/article/" + articleId
+    "https://shomadhan.herokuapp.com/api/v1/article/" + articleId
   );
   useEffect(() => {
     reset(data);
@@ -30,7 +30,7 @@ export default function EditArticle() {
       body: data.content,
     };
     fetch(
-      `http://localhost:5000/api/v1/update-article/${user?.user?.uid}/${articleId}`,
+      `https://shomadhan.herokuapp.com/api/v1/update-article/${user?.user?.uid}/${articleId}`,
       {
         method: "PATCH",
         headers: {

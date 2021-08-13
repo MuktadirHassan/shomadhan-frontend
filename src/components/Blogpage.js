@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import img from "../assets/img.jpg";
 import useFetch from "./../lib/useFetch";
@@ -6,8 +6,8 @@ import "./css/Blogpage.css";
 import Image from "./Image";
 export default function Blogpage() {
   const { id } = useParams();
-  const { data, loading, error } = useFetch(
-    `http://localhost:5000/api/v1/article/${id}`
+  const { data } = useFetch(
+    `https://shomadhan.herokuapp.com/api/v1/article/${id}`
   );
   return (
     <main className="container px-5 pb-5 mx-auto">

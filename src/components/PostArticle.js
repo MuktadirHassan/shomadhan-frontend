@@ -20,7 +20,7 @@ export default function PostArticle() {
       authorEmail: user.user?.email,
       authorId: user.user?.uid,
     };
-    fetch("http://localhost:5000/api/v1/post-article", {
+    fetch("https://shomadhan.herokuapp.com/api/v1/post-article", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

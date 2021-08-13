@@ -8,12 +8,15 @@ export default function MyArticles() {
     user: { user },
   } = useAuth();
   const history = useHistory();
-  const { data, errors, loading } = useFetch(
-    `http://localhost:5000/api/v1/article/by-user/${user?.email}`
+  const { data } = useFetch(
+    `https://shomadhan.herokuapp.com/api/v1/article/by-user/${user?.email}`
   );
   const deleteArticle = (id) => {
     fetch(
-      "http://localhost:5000/api/v1/delete-article/" + user.uid + "/" + id,
+      "https://shomadhan.herokuapp.com/api/v1/delete-article/" +
+        user.uid +
+        "/" +
+        id,
       {
         headers: {
           authorization: sessionStorage.getItem("token"),

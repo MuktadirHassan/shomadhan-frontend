@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 export default function Register() {
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const [error, setError] = useState(null);
+  const onSubmit = (data) => {
+    data.role = "user";
+    fetch("https://shomadhan.herokuapp.com/api/v1/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          sessionStorage.clear();
+          setError("Successfully created account. Please login. 😁");
+          setTimeout(() => history.push("/profile"), 1500);
+        } else {
+          setError(data.message);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <section className="text-gray-600 body-font">
       <div className="container flex flex-wrap items-center px-5 py-24 mx-auto">
@@ -33,6 +56,7 @@ export default function Register() {
               </label>
               <input
                 {...register("email", { required: true })}
+                onChange={() => setError(null)}
                 type="email"
                 id="email"
                 className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
@@ -52,6 +76,7 @@ export default function Register() {
               </label>
               <input
                 {...register("password", { required: true })}
+                onChange={() => setError(null)}
                 type="password"
                 id="password"
                 className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
@@ -66,12 +91,10 @@ export default function Register() {
               type="submit"
               className="px-8 py-2 text-lg text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600"
             >
-              Login
+              Register
             </button>
           </form>
-          <p className="mt-3 text-xs text-gray-500">
-            Random text just to make it look beautiful.
-          </p>
+          <p className="mt-3 text-xs text-gray-500">{error}</p>
         </div>
       </div>
     </section>
