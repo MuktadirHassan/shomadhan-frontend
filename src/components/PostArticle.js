@@ -48,7 +48,7 @@ export default function PostArticle() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="relative mb-4">
           <label htmlFor="title" className="text-sm leading-7 text-gray-600">
-            Title
+            Title of the article
           </label>
           <input
             {...register("title", { required: true })}

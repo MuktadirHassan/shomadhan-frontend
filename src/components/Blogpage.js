@@ -14,7 +14,7 @@ export default function Blogpage() {
       <article>
         <div className="pb-5">
           <h1 className="pt-4 pb-2 text-2xl font-medium md:text-4xl lg:text-6xl lg:py-4">
-            {data && data[0].title}
+            {/* {data && data[0].title} */}
           </h1>
           <p className="pb-2 text-sm text-gray-600">
             by{" "}
@@ -23,19 +23,19 @@ export default function Blogpage() {
             </span>{" "}
             on{" "}
             <span>
-              {data &&
+              {/* {data &&
                 new Date(data[0].date).toLocaleDateString("en-BD", {
                   weekday: "long",
                   year: "numeric",
                   month: "long",
                   day: "numeric",
-                })}
+                })} */}
             </span>
           </p>
         </div>
         <Image height="6" width="16" src={img} alt="alt-text" />
         <div className="text-gray-600 blog-content">
-          <p>{data && data[0].body}</p>
+          {/* <p>{data && data[0].body}</p> */}
         </div>
       </article>
     </main>

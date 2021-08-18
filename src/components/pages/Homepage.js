@@ -26,7 +26,7 @@ function Articles() {
   );
 
   if (error) return <div>failed to load</div>;
-  if (!data?.data.articles) {
+  if (!data) {
     //   Loader
     const counter = [0, 1, 2];
     return (
@@ -49,8 +49,11 @@ function Articles() {
     );
   }
   const articlesAnimate = {
-    init: {},
+    init: {
+      opacity: 0,
+    },
     animate: {
+      opacity: 1,
       transition: {
         delayChildren: 0.2,
         staggerChildren: 0.2,
