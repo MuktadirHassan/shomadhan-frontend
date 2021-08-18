@@ -1,9 +1,9 @@
 import React from "react";
 
 export default function Bgwrapper({ children }) {
-  const styles = {
-    zIndex: "-1",
-  };
+  // const styles = {
+  //   zIndex: "-1",
+  // };
   return (
     <div className="">
       {/* <div style={styles} className="relative w-full max-w-lg">
