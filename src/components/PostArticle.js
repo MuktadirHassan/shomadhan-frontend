@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "./AuthContext";
-
 export default function PostArticle() {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -43,8 +42,14 @@ export default function PostArticle() {
         setResponse(err);
       });
   };
+
+  // Text Editor
+
   return (
     <div className="flex flex-col w-full p-8 mx-auto mt-10 bg-gray-100 rounded-lg lg:w-2/3 md:w-2/3 md:mt-0">
+      {/* ----------------------------------------- */}
+
+      {/* ------------------------------------------ */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="relative mb-4">
           <label htmlFor="title" className="text-sm leading-7 text-gray-600">
