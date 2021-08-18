@@ -11,8 +11,8 @@ export default function Navbar() {
     history.push("/");
   };
   return (
-    <header className="text-gray-600 body-font">
-      <div className="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
+    <header className="text-gray-600 container-2xl body-font">
+      <div className="flex flex-col flex-wrap items-center py-4 md:flex-row">
         <Link
           to="/"
           className="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0"
@@ -33,10 +33,7 @@ export default function Navbar() {
         </Link>
         <nav className="flex flex-wrap items-center justify-center text-base md:ml-auto">
           {user?.user?.role === "admin" && (
-            <Link
-              to="/dashboard"
-              className="inline-flex items-center px-3 py-1 mt-4 mr-2 text-base bg-gray-100 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0"
-            >
+            <Link to="/dashboard" className="btn">
               Admin
               <svg
                 fill="none"
@@ -58,10 +55,7 @@ export default function Navbar() {
           )}
           {user.user ? (
             <>
-              <Link
-                to="/profile"
-                className="inline-flex items-center px-3 py-1 mt-4 mr-2 text-base bg-gray-100 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0"
-              >
+              <Link to="/profile" className="btn">
                 Profile
                 <svg
                   fill="none"
@@ -80,19 +74,13 @@ export default function Navbar() {
                   ></path>
                 </svg>
               </Link>
-              <button
-                className="inline-flex items-center px-3 py-1 mt-4 text-base bg-gray-100 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0"
-                onClick={logout}
-              >
+              <button className="btn" onClick={logout}>
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="inline-flex items-center px-3 py-1 mt-4 mr-2 text-base bg-gray-100 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0"
-              >
+              <Link to="/login" className="btn">
                 Sign in
                 <svg
                   fill="none"
@@ -111,10 +99,7 @@ export default function Navbar() {
                   ></path>
                 </svg>
               </Link>
-              <Link
-                to="/register"
-                className="inline-flex items-center px-3 py-1 mt-4 text-base bg-gray-100 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0"
-              >
+              <Link to="/register" className="btn">
                 Register
                 <svg
                   fill="none"

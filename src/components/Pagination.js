@@ -7,9 +7,8 @@ export default function Pagination({ data, setPage }) {
       setPage(data?.previous?.page);
     }
   };
-  console.log(data);
   return (
-    <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 sm:px-6">
+    <div className="flex items-center justify-between py-3 border-t border-gray-200">
       <div className="flex items-center justify-between flex-1 mx-auto">
         <div>
           <nav

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      {children}
+      <Router>{children}</Router>
     </AuthContext.Provider>
   );
 };

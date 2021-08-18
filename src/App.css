@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 * {
   font-family: "Inter", sans-serif;
@@ -14,4 +14,13 @@
   .animation-delay-5000 {
     animation-delay: 5s;
   }
+}
+.btn {
+  @apply inline-flex items-center px-3 py-1 mt-4 mr-2 text-base bg-gray-100 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0;
+}
+.container-px {
+  @apply container px-2 mx-auto md:px-3;
+}
+.container-2xl {
+  @apply max-w-2xl px-2 mx-auto md:px-3;
 }
